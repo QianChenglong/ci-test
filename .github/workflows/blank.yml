@@ -24,3 +24,10 @@ jobs:
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
+    - uses: azure/k8s-actions/k8s-set-context@master
+      with:
+        kubeconfig: ${{ secrets.KUBE_CONFIG }}
+    - uses: azure/k8s-actions/k8s-deploy@master
+      with:
+        manifests: |
+          test.yaml
