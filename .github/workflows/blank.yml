@@ -19,5 +19,5 @@ jobs:
             username: ${{ secrets.REGISTRY_USERNAME }}
             password: ${{ secrets.REGISTRY_PASSWORD }}
         - run: |
-             docker build -t ci-test .
-             docker push ci-test
+            docker build -t ci-test .
+            docker push ci-test
