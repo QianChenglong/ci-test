@@ -13,10 +13,14 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@master
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
     - uses: azure/docker-login@v1
       with:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        docker build -t qianchenglong/ci-test .
-        docker push qianchenglong/ci-test
+        echo hello
