@@ -26,6 +26,6 @@ jobs:
         pwd
         whoami
         echo $HOME
-	cd ~
+        cd ~
 	pwd
 
