@@ -23,4 +23,9 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        echoaa hello
+        pwd
+        whoami
+        echo $HOME
+	cd ~
+	pwd
+
