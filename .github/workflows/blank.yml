@@ -1,7 +1,9 @@
 name: CI
 
 on:
-  pull_request:
+  repository_dispatch:
+    types: [production-deploy]
+  push:
     branches:
     - master
  
@@ -12,16 +14,19 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
-    - uses: azure/k8s-actions/k8s-set-context@master
+
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@master
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+    - uses: azure/docker-login@v1
       with:
-        kubeconfig: ${{ secrets.KUBE_CONFIG }}
-    - uses: azure/k8s-actions/k8s-deploy@master
-      with:
-        manifests: |
-          test.yaml
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - run: |
+        pwd
+        whoami
+        echo $HOME
+        cd ~
+        pwd
